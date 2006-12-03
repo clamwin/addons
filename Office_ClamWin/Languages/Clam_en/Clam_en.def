@@ -1,0 +1,4 @@
+EXPORTS
+    GetLanguageSize
+	GetLanguageName
+	GetDllVersion

@@ -1,0 +1,207 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral (Default) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEUD)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_DEFAULT
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_VIRUSFOUND          "A virus was found!!!"
+    IDS_ACCOUNTENABLEQ      "Do you want to enable the MS Office Document ClamWin Virus Scanner\nfor all users or just for your account?"
+    IDS_CONFIRMINSTALL      "This will install ClamWin MS Office Document virus scanner by Dark Sylinc on your PC.\nDo you want to proceed?"
+    IDS_CONFIRMUNINSTALL    "This will uninstall ClamWin MS Office Document virus scanner by Dark Sylinc on your PC.\nDo you want to proceed?"
+    IDS_CLAMWNOTINSTALL     "Error: ClaWin was not found. Please install it.\nWarning: Your file was not scanned. Therefore it may still contain viruses."
+    IDS_CONFIRMCRASH        "Are you really sure you want to crash this program?\n(Clicking ""NO"" will lead you to the previous dialog)"
+    IDS_EN_OLEMAYBESLOW     "Enable OLE scanning (may be slow)"
+    IDS_OLEVIRUSFOUND       "A virus was found!\na) OK tp Delete the virus\nb) Cancel to ignore it\nNote: If you delete it you may receive a message asking to reinstall a missing feature. Just ignore it"
+    IDS_LOGGING             "Logging (verbose)"
+END
+
+#endif    // Neutral (Default) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Spanish (Modern) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ESN)
+#ifdef _WIN32
+LANGUAGE LANG_SPANISH, SUBLANG_SPANISH_MODERN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,88,2,3
+ PRODUCTVERSION 0,88,2,3
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "0c0a04b0"
+        BEGIN
+            VALUE "Comments", "http://www.clamwin.com/\0"
+            VALUE "CompanyName", "ClamWin Antivirus Software\0"
+            VALUE "FileDescription", "ClamWin MS Office  Plug-in\0"
+            VALUE "FileVersion", "0, 88, 2, 3\0"
+            VALUE "InternalName", "Office_ClamWin\0"
+            VALUE "LegalCopyright", "Copyright © 2005 Dark Sylinc. Under GPL license\0"
+            VALUE "LegalTrademarks", "ClamWin program code © 2004 - 2005 Alex Cherney\0"
+            VALUE "OriginalFilename", "Office_ClamWin.dll\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "Dark Sylinc Office_ClamWin\0"
+            VALUE "ProductVersion", "0, 88, 2, 3\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0xc0a, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_LANGUAGECHOOSE DIALOG DISCARDABLE  0, 0, 203, 73
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "ClamWin's Office Document Scanner"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,75,56,50,14,BS_FLAT
+    COMBOBOX        IDC_LANGCHOOSE,15,17,174,82,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Choose your language:",IDC_STATIC,6,2,191,36
+    CONTROL         "Use internal (English) language",IDC_USEDEFAULT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,41,113,10
+END
+
+IDD_CONFIG DIALOG DISCARDABLE  0, 0, 145, 89
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "General Config"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,12,69,50,14,BS_FLAT
+    PUSHBUTTON      "Cancel",IDCANCEL,74,69,50,14,BS_FLAT
+    CONTROL         "Enable OLE scanning (may be slow)",IDC_OLESCANENABLE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,9,5,129,10
+    EDITTEXT        IDC_DELAY,25,41,40,14,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "milliseconds",IDC_STATIC,75,44,38,8
+    GROUPBOX        "ClamWin restore delay time:",IDC_STATIC,8,28,124,35
+    CONTROL         "Logging (verbose)",IDC_LOGGING,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,9,15,125,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_LANGUAGECHOOSE, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 66
+    END
+
+    IDD_CONFIG, DIALOG
+    BEGIN
+        VERTGUIDE, 9
+        BOTTOMMARGIN, 81
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_CLAMICON            ICON    DISCARDABLE     "FrameIcon.ico"
+#endif    // Spanish (Modern) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

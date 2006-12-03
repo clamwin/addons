@@ -1,0 +1,128 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Spanish (Modern) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ESN)
+#ifdef _WIN32
+LANGUAGE LANG_SPANISH, SUBLANG_SPANISH_MODERN
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,86,2,0
+ PRODUCTVERSION 0,86,2,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "0c0a04b0"
+        BEGIN
+            VALUE "Comments", "http://www.clamwin.com/\0"
+            VALUE "CompanyName", "ClamWin Antivirus Software\0"
+            VALUE "FileDescription", "Language file for ClamWin MS Office  Plug-in\0"
+            VALUE "FileVersion", "0, 86, 2, 0\0"
+            VALUE "InternalName", "Office_ClamWin Clam_es\0"
+            VALUE "LegalCopyright", "Copyright © 2005 Dark Sylinc. Under GPL license\0"
+            VALUE "LegalTrademarks", "ClamWin program code © 2004 - 2005 Alex Cherney\0"
+            VALUE "OriginalFilename", "Clam_es.dll\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "Dark Sylinc Office_ClamWin\0"
+            VALUE "ProductVersion", "0, 86, 2, 0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0xc0a, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_VIRUSFOUND          "Se ha encontrado un virus!!!"
+    IDS_ACCOUNTENABLEQ      "¿Desea habilitar el MS Office Document ClamWin Virus Scanner\npara todos los usuarios o sólo para su cuenta?"
+    IDS_CONFIRMINSTALL      "Se instalará ClamWin MS Office Document virus scanner por Dark Sylinc en su PC.\n¿Desea continuar?"
+    IDS_CONFIRMUNINSTALL    "Se desinstalará ClamWin MS Office Document virus scanner por Dark Sylinc en su PC.\n¿Desea continuar?"
+    IDS_CLAMWNOTINSTALL     "Error: ClaWin no se ha encontrado. Por favor instale el programa.\nAdvertencia: Su archivo no fue escaneado por ClamWin. Es posible que todavía contenga virus."
+    IDS_CONFIRMCRASH        "¿Está realmente seguro que desea colgar este programa?\n(Click ""NO"" para volver a la ventana anterior)"
+    IDS_EN_OLEMAYBESLOW     "Habilitar OLE (puede ser lento)"
+    IDS_OLEVIRUSFOUND       "Se ha encontrado un virus!!\na) OK para borrarlo\nb) Cancelar para dejarlo.\nNota: Si lo borra puede recibir un mensaje indicando que hay un componente mal instalado, ignórelo."
+    IDS_LOGGING             "Registro *.log (extenso)"
+END
+
+#endif    // Spanish (Modern) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

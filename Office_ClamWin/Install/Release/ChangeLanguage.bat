@@ -1,0 +1,1 @@
+rundll32.exe ..\..\Release\Office_ClamWin.dll,ChangeLanguage
