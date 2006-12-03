@@ -1,0 +1,85 @@
+# NMAKE File for Clamssenger. Just type "nmake -f makefile.vc"
+
+!IF "$(OS)" == "Windows_NT"
+NULL=
+!ELSE
+NULL=nul
+!ENDIF
+
+OUTDIR=.\Release
+INTDIR=.\Release
+# Begin Custom Macros
+OutDir=.\Release
+# End Custom Macros
+
+ALL : "$(OUTDIR)\Clamssenger.exe"
+
+
+CLEAN :
+	-@erase "$(INTDIR)\Main.obj"
+	-@erase "$(INTDIR)\resource.res"
+	-@erase "$(INTDIR)\vc60.idb"
+	-@erase "$(OUTDIR)\Clamssenger.exe"
+
+"$(OUTDIR)" :
+    if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
+
+CPP=cl.exe
+CPP_PROJ=/nologo /ML /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"$(INTDIR)\Clamssenger.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /c
+
+.c{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $<
+<<
+
+.cpp{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $<
+<<
+
+.cxx{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $<
+<<
+
+.c{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $<
+<<
+
+.cpp{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $<
+<<
+
+.cxx{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $<
+<<
+
+RSC=rc.exe
+RSC_PROJ=/l 0x2c0a /fo"$(INTDIR)\resource.res" /d "NDEBUG"
+BSC32=bscmake.exe
+BSC32_FLAGS=/nologo /o"$(OUTDIR)\Clamssenger.bsc"
+BSC32_SBRS= \
+
+LINK32=link.exe
+LINK32_FLAGS=kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /incremental:no /pdb:"$(OUTDIR)\Clamssenger.pdb" /machine:I386 /out:"$(OUTDIR)\Clamssenger.exe"
+LINK32_OBJS= \
+	"$(INTDIR)\Main.obj" \
+	"$(INTDIR)\resource.res"
+
+"$(OUTDIR)\Clamssenger.exe" : "$(OUTDIR)" $(DEF_FILE) $(LINK32_OBJS)
+    $(LINK32) @<<
+  $(LINK32_FLAGS) $(LINK32_OBJS)
+<<
+
+SOURCE=.\Main.cpp
+
+"$(INTDIR)\Main.obj" : $(SOURCE) "$(INTDIR)"
+
+SOURCE=.\resource.rc
+
+"$(INTDIR)\resource.res" : $(SOURCE) "$(INTDIR)"
+	$(RSC) $(RSC_PROJ) $(SOURCE)
+
