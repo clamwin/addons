@@ -1,0 +1,27 @@
+Tools used for the creation of this plugin:
+===========================================
+* Firefox/Thunderbird Extension Wizard 
+  (http://ted.mielczarek.org/code/mozilla/extensionwiz/)
+* TextPad, the great text editor by Helios Software Solutions
+  (http://www.textpad.com/)
+
+
+Great sites on Mozilla extension development:
+=============================================
+* http://kb.mozillazine.org/Knowledge_Base
+* http://www.xulplanet.com/
+* http://www.mozilla.org
+* http://www.mozilla.org/developer/ 
+
+
+This plugin was inspired by:
+============================
+* The EnigMail extension (http://enigmail.mozdev.org/)
+* Readonly Attachments extension (http://www.yergler.net/ReadonlyAttachments)
+
+
+And of course, much thanks to:
+==============================
+* The ClamAV team (http://www.clamav.net)
+* The entire ClamWin team and user base (http://www.clamwin.com)
+* Mozilla for their great Thunderbird client (http://www.mozilla.org)

@@ -1,0 +1,5 @@
+content	clambird	content/
+locale	clambird	en-US	locale/en-US/
+skin	clambird	classic/1.0	skin/
+overlay	chrome://messenger/content/messenger.xul	chrome://clambird/content/thunderbirdOverlay.xul
+overlay chrome://messenger/content/msgHdrViewOverlay.xul chrome://clambird/content/clambirdMsgHdrViewOverlay.xul

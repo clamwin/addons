@@ -1,0 +1,40 @@
+//-----------------------------------------------------------------------------
+// Name:        nsIClamWinService.idl
+// Product:     ClamWin Antivirus Thunderbird Extension
+//
+// Author(s):      budtse [budtse at users dot sourceforge dot net]
+//
+// Created:     2006/11/07
+// Copyright:   Copyright ClamWin Pty Ltd (c) 2005-2006
+// Licence:
+//   This program is free software; you can redistribute it and/or modify
+//   it under the terms of the GNU General Public License as published by
+//   the Free Software Foundation; either version 2 of the License, or
+//   (at your option) any later version.
+//
+//   This program is distributed in the hope that it will be useful,
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   GNU General Public License for more details.
+//
+//   You should have received a copy of the GNU General Public License
+//   along with this program; if not, write to the Free Software
+//   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+
+#include "nsISupports.idl"
+
+/******************
+ * Clamwin Service
+ ******************/
+[scriptable, uuid(84EFD804-2E33-4f7c-9318-838DD5014F1A)]
+interface nsIClamwinService : nsISupports
+{
+  readonly attribute ACString Version;
+
+  void Initialize();
+  void Log(in string aMessage);
+  ACString GetTempFilename(in string aOriginalFilename);
+  ACString GetQuarantineFilename(in string aOriginalFilename);
+  short ScanFile(in string aPath, out string aReportFile);
+  void CloseDatabase();
+};

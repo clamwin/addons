@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ********************************************************************** -->
+<!--                                                                        -->
+<!-- Name:        about.xul                                                 -->
+<!--                                                                        -->
+<!-- Product:     ClamBird                                                  -->
+<!--              ClamWin Antivirus Thunderbird Extension                   -->
+<!--                                                                        -->
+<!-- Author(s):      budtse [budtse at users dot sourceforge dot net]       -->
+<!--                                                                        -->
+<!-- Created:     2006/11/07                                                -->
+<!-- Copyright:   Copyright ClamWin Pty Ltd (c) 2005-2006                   -->
+<!-- Licence:                                                               -->
+<!--   This program is free software; you can redistribute it and/or modify -->
+<!--   it under the terms of the GNU General Public License as published by -->
+<!--   the Free Software Foundation; either version 2 of the License, or    -->
+<!--   (at your option) any later version.                                  -->
+<!--                                                                        -->
+<!--   This program is distributed in the hope that it will be useful,      -->
+<!--   but WITHOUT ANY WARRANTY; without even the implied warranty of       -->
+<!--   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        -->
+<!--   GNU General Public License for more details.                         -->
+<!--                                                                        -->
+<!--   You should have received a copy of the GNU General Public License    -->
+<!--   along with this program; if not, write to the Free Software          -->
+<!--   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,           -->
+<!--   MA 02110-1301 USA                                                    -->
+<!--                                                                        -->
+<!-- ********************************************************************** -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE dialog SYSTEM "chrome://clambird/locale/about.dtd">
+<dialog title="&about; ClamBird" orient="vertical" autostretch="always" onload="sizeToContent()" buttons="accept" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<!-- Original template by Jed Brown -->
+<groupbox align="center" orient="horizontal">
+<vbox>
+  <text value="ClamBird" style="font-weight: bold; font-size: x-large;"/>
+  <text value="&version; 0.1"/>
+  <separator class="thin"/>
+  <text value="&createdBy;" style="font-weight: bold;"/>
+  <text value="Peter Budts"/>
+  <separator class="thin"/>
+      <text value="&homepage;" style="font-weight: bold;"/>
+    <text value="http://www.clamwin.com"
+          class="url"
+        onclick="window.open('http://www.clamwin.com'); window.close();"/>
+  <separator class="thin"/>
+</vbox>
+</groupbox>
+</dialog>
