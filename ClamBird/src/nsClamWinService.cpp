@@ -39,6 +39,7 @@
 #include <windows.h>
 #include "tools.h"
 #include <process.h>
+#include <shlobj.h>
 
 NS_IMPL_ISUPPORTS1(nsClamwinService, nsIClamwinService)
 
@@ -80,12 +81,31 @@ NS_IMETHODIMP nsClamwinService::Initialize() {
 		return NS_OK;
 	}
 
+	mClamWinConfigFile = new char[MAX_PATH + 1];
+	if (GetClamWinConfigFile(mClamWinConfigFile, MAX_PATH) == 0)
+	{
+		delete mClamWinConfigFile;
+		mClamWinConfigFile = NULL;
+		return NS_ERROR_UNEXPECTED;
+	}
+
 	// Get the temporary file path
 	mTempDirectory = new char[MAX_PATH + 1];
 	if (!GetTempDirectory(mTempDirectory, MAX_PATH))
 	{
 		delete mTempDirectory;
 		mTempDirectory = NULL;
+		return NS_ERROR_UNEXPECTED;
+	}
+
+	// Get the ClamWin path from the registry
+	// We need it to add the bin directory to the path, so we
+	// always use the latest version of libclamav available.
+	mClamWinPath = new char[MAX_PATH + 1];
+	if (GetClamWinPath(mClamWinPath, MAX_PATH) == 0)
+	{
+		delete mClamWinPath;
+		mClamWinPath = NULL;
 		return NS_ERROR_UNEXPECTED;
 	}
 
@@ -104,14 +124,24 @@ NS_IMETHODIMP nsClamwinService::Initialize() {
 		mprintf("Initializing nsClamWinService.cpp");
 	}
 
-	// TODO: get this value from an ini file
+	// Read Quarantine dir from the configuration file
 	mQuarantineDirectory = new char[MAX_PATH + 1];
-	strcpy(mQuarantineDirectory, "C:\\Documents and Settings\\All Users\\.clamwin\\quarantine");
+	if (GetPrivateProfileString("ClamAV", "quarantinedir", "", mQuarantineDirectory, MAX_PATH, mClamWinConfigFile) == 0)
+	{
+		delete mQuarantineDirectory;
+		mQuarantineDirectory = NULL;
+		return NS_ERROR_UNEXPECTED;
+	}
 	mprintf("Quarantine Directory = '%s'", mQuarantineDirectory);
 
-	// TODO: get this value from an ini file
+	// Read database path from the configuration file
 	mDatabasePath = new char[MAX_PATH + 1];
-	strcpy(mDatabasePath, "C:\\Documents and Settings\\All Users\\.clamwin\\db");
+	if (GetPrivateProfileString("ClamAV", "database", "", mDatabasePath, MAX_PATH, mClamWinConfigFile) == 0)
+	{
+		delete mDatabasePath;
+		mDatabasePath = NULL;
+		return NS_ERROR_UNEXPECTED;
+	}
 	mprintf("Database Path = '%s'", mDatabasePath);
 
 	// Prepare the mLimits structure for the calls to libclamav
@@ -591,4 +621,85 @@ NS_IMETHODIMP nsClamwinService::CloseDatabase()
 	cl_free(mRoot);
 	mRoot = NULL;
     return NS_OK;
+}
+
+size_t nsClamwinService::GetClamWinPath(char* aPath, size_t aSize)
+{
+    DWORD dwType;
+    HKEY hKey;
+
+	if (!aPath) return 0;
+    if (aSize == 0) return 0;
+    *aPath = '\0';
+
+	// try in hkey_current_user
+    if (ERROR_SUCCESS == RegOpenKeyEx(HKEY_CURRENT_USER, 
+        "Software\\ClamWin", 0, KEY_READ, &hKey))
+    {
+        RegQueryValueEx(hKey, "Path", NULL, &dwType, (PBYTE)aPath, 
+            (LPDWORD)&aSize);
+        CloseHandle(hKey);
+    }
+    // try in hkey_local_machine if failed
+    if (!strlen(aPath) && (ERROR_SUCCESS == RegOpenKeyEx(HKEY_LOCAL_MACHINE, 
+        "Software\\ClamWin", 0, KEY_READ, &hKey)))
+
+    {
+        RegQueryValueEx(hKey, "Path", NULL, &dwType, (PBYTE)aPath, 
+            (LPDWORD)&aSize);
+        CloseHandle(hKey);
+    }
+	return strlen(aPath);
+}
+
+size_t nsClamwinService::GetClamWinConfigFile(char* aConfigFile, size_t aSize)
+{
+	char profileDir[MAX_PATH + 1];
+
+	if (aConfigFile == NULL) return 0;
+    if (aSize == 0) return 0;
+	*aConfigFile = '\0';
+
+	if (!SUCCEEDED(SHGetFolderPath(NULL, CSIDL_APPDATA, NULL, 
+        SHGFP_TYPE_CURRENT, &profileDir[0])))
+    {
+		return 0;
+    }
+
+	strncpy(aConfigFile, &profileDir[0], aSize);
+	strncat(aConfigFile, "\\.clamwin\\clamwin.conf", 
+        aSize - strlen(aConfigFile));
+
+	// check if this file exists
+	if (!FileExists(aConfigFile))
+	{
+		char defaultConfigFile[MAX_PATH];
+		// copy the standard clamwin.conf file from the clamwin folder if not
+		sprintf(defaultConfigFile, "%s\\ClamWin.conf", mClamWinPath);
+		if (!FileExists(defaultConfigFile))
+		{
+			strcpy(aConfigFile, "");
+			return 0;
+		}
+		if (CopyFile(defaultConfigFile, aConfigFile, FALSE) == FALSE)
+		{
+			strcpy(aConfigFile, "");
+			return 0;
+		}
+	}
+	return strlen(aConfigFile);
+}
+
+bool nsClamwinService::FileExists(const char* aPath)
+{
+    if (!aPath) return false;
+    if (strlen(aPath) == 0) return false;
+
+    WIN32_FIND_DATA findData;
+	HANDLE hFile = FindFirstFile(aPath, &findData);
+	if (hFile == INVALID_HANDLE_VALUE) {
+		return false;
+	}
+	FindClose(hFile);
+	return true;
 }

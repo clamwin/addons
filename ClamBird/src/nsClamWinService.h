@@ -65,6 +65,7 @@ public:
 private:
   ~nsClamwinService();
 
+  size_t GetClamWinConfigFile(char* aConfigFile, size_t aSize);
   bool GetQuarantineFilename(const char *aOriginalFilename,
 					char* aQuarantineFilename, size_t aSize);
   bool MoveFileToQuarantine(const char* aFilename,
@@ -78,9 +79,12 @@ private:
   void GetDatabaseVersion(int *pMainVersion, int *pDailyVersion);
   int CheckDatabaseChangesAndReload();
   int ScanFile(const char *aPath, char** aVirusName);
-
+  size_t GetClamWinPath(char* aPath, size_t aSize);
+  bool FileExists(const char* aPath);
 
   // private data members
+  char* mClamWinPath;
+  char* mClamWinConfigFile;
   char* mTempDirectory;
   char* mQuarantineDirectory;
   char* mDatabasePath;

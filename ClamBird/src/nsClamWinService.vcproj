@@ -73,7 +73,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="xpcomglue_s.lib nspr4.lib plds4.lib plc4.lib xpcom.lib libclamav.lib"
+				AdditionalDependencies="xpcomglue_s.lib nspr4.lib plds4.lib plc4.lib xpcom.lib libclamav.lib Advapi32.lib shell32.lib"
 				OutputFile="D:\PROJECTS\mozilla\dist\bin\components\ClamwinService.dll"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
