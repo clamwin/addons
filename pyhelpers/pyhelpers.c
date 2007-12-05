@@ -24,12 +24,25 @@
 PyObject *PyhelpersError;
 
 /* Methods */
+static PyObject *pyhi_killProcess(PyObject *self, PyObject *args)
+{
+    DWORD pid;
+
+    if (!PyArg_ParseTuple(args, "i", &pid))
+    {
+        PyErr_SetString(PyExc_TypeError, "usage killProcess(pid)");
+        return NULL;
+    }
+
+    return (killProcess(pid) ? Py_False : Py_True);
+}
+
 static PyObject *pyhi_unloadModule(PyObject *self, PyObject *args)
 {
     DWORD pid;
     HANDLE hModule;
 
-    if (!PyArg_ParseTuple(args, "i,l", &pid, (long *) &hModule))
+    if (!PyArg_ParseTuple(args, "il", &pid, (long *) &hModule))
     {
         PyErr_SetString(PyExc_TypeError, "usage unloadModule(pid, handle)");
         return NULL;
@@ -42,6 +55,7 @@ static PyObject *pyhi_unloadModule(PyObject *self, PyObject *args)
 static PyMethodDef pyhelpersMethods[] =
 {
     { "unloadModule", pyhi_unloadModule, METH_VARARGS, "Unload a module from a running process" },
+    { "killProcess",  pyhi_killProcess,  METH_VARARGS, "Kill a running process"                 },
     { NULL, NULL, 0, NULL }
 };
 
