@@ -23,6 +23,8 @@
 
 memhelpers_t pyhi_helpers;
 
+#define TIMEOUT_MODULE  30000
+
 /* Needed to Scan System Processes */
 int EnablePrivilege(LPCSTR PrivilegeName, DWORD yesno)
 {
@@ -44,6 +46,66 @@ int EnablePrivilege(LPCSTR PrivilegeName, DWORD yesno)
     CloseHandle(hToken);
     return (GetLastError() == ERROR_SUCCESS) ? 1 : 0;
 }
+
+int killProcess(DWORD pid)
+{
+    HANDLE hProc;
+    if ((hProc = OpenProcess(SYNCHRONIZE | PROCESS_TERMINATE, FALSE, pid)))
+    {
+        TerminateProcess(hProc, 0);
+        if (WaitForSingleObject(hProc, TIMEOUT_MODULE) != WAIT_OBJECT_0)
+            fprintf(stderr, "Unable to unload process from memory\n");
+        CloseHandle(hProc);
+    }
+    else
+        fprintf(stderr, "OpenProcess() failed %d\n", GetLastError());
+    return 1; /* Skip to next process anyway */
+}
+
+/* Not so safe ;) */
+int unloadModule(DWORD pid, HANDLE hModule)
+{
+    DWORD rc = 1;
+    HANDLE ht;
+    HANDLE hProcess = OpenProcess(PROCESS_CREATE_THREAD | PROCESS_VM_OPERATION | PROCESS_VM_WRITE | PROCESS_VM_READ, FALSE, pid);
+
+    if (!hProcess)
+    {
+        fprintf(stderr, "OpenProcess() failed %d\n", GetLastError());
+        return 1; /* Skip to next process */
+    }
+
+    if ((ht = pyhi_helpers.CreateRemoteThread(hProcess, 0, 0, FreeLibrary, hModule, 0, &rc)))
+    {
+        if(WaitForSingleObject(ht, TIMEOUT_MODULE) == WAIT_TIMEOUT)
+        {
+            CloseHandle(ht);
+            CloseHandle(hProcess);
+            fprintf(stderr, "The module may trying to trick us, killing the process, please rescan\n");
+            return killProcess(pid);
+        }
+        CloseHandle(ht);
+        rc = 0; /* Continue scanning this process */
+    }
+    else
+    {
+        DWORD res = GetLastError();
+        if (res == ERROR_CALL_NOT_IMPLEMENTED)
+        {
+            fprintf(stderr, "Module unloading is not supported on this OS\n");
+            rc = -1; /* Don't complain about removing/moving the file */
+        }
+        else
+        {
+            fprintf(stderr, "CreateRemoteThread() failed %d\n", res);
+            rc = 1; /* Skip to next process */
+        }
+    }
+
+    CloseHandle(hProcess);
+    return rc;
+}
+
 
 /* ---- */
 #define Q(string) # string

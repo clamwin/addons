@@ -23,11 +23,25 @@
 
 PyObject *PyhelpersError;
 
-/* ----------- */
+/* Methods */
+static PyObject *pyhi_unloadModule(PyObject *self, PyObject *args)
+{
+    DWORD pid;
+    HANDLE hModule;
+
+    if (!PyArg_ParseTuple(args, "i,l", &pid, (long *) &hModule))
+    {
+        PyErr_SetString(PyExc_TypeError, "usage unloadModule(pid, handle)");
+        return NULL;
+    }
+
+    return (unloadModule(pid, hModule) ? Py_False : Py_True);
+}
+
 /* Methods Table */
 static PyMethodDef pyhelpersMethods[] =
 {
-//    { "isSupported", pyhi_isSupported, METH_VARARGS, "Check if OS supports process helpers functions"    },
+    { "unloadModule", pyhi_unloadModule, METH_VARARGS, "Unload a module from a running process" },
     { NULL, NULL, 0, NULL }
 };
 

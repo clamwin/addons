@@ -89,7 +89,6 @@ static PyObject *ToolHelp_iternext(ToolHelpObject *self)
     list = PyList_New(0);
 
     hModuleSnap = pyhi_helpers.CreateToolhelp32Snapshot(TH32CS_SNAPMODULE|TH32CS_SNAPMODULE32, pid);
-    //hModuleSnap = pyhi_helpers.CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid);
 
     if (hModuleSnap != INVALID_HANDLE_VALUE)
     {
@@ -98,7 +97,7 @@ static PyObject *ToolHelp_iternext(ToolHelpObject *self)
         if(pyhi_helpers.Module32First(hModuleSnap, &me32))
         {
             do
-                PyList_Append(list, PyString_FromString(me32.szExePath));
+                PyList_Append(list, Py_BuildValue("(s,l)", me32.szExePath, me32.hModule));
             while (pyhi_helpers.Module32Next(hModuleSnap, &me32));
         }
         else

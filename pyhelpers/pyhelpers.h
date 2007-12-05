@@ -68,4 +68,7 @@ extern int EnablePrivilege(LPCSTR PrivilegeName, DWORD yesno);
 extern int pyhi_dynlink(void);
 extern int initToolHelp(PyObject *module);
 
+extern int killProcess(DWORD pid);
+extern int unloadModule(DWORD pid, HANDLE hModule);
+
 #endif /* _PYHELPERS_H */
