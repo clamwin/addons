@@ -138,10 +138,10 @@ static PyTypeObject ToolHelpType = {
     0,                         /* tp_as_buffer */
     Py_TPFLAGS_DEFAULT,        /* tp_flags */
     "Tool Help Objects",       /* tp_doc */
-    0,		                   /* tp_traverse */
-    0,		                   /* tp_clear */
-    0,		                   /* tp_richcompare */
-    0,		                   /* tp_weaklistoffset */
+    0,                         /* tp_traverse */
+    0,                         /* tp_clear */
+    0,                         /* tp_richcompare */
+    0,                         /* tp_weaklistoffset */
     (getiterfunc) ToolHelp_self,      /* tp_iter */
     (iternextfunc) ToolHelp_iternext, /* tp_iternext */
     ToolHelp_methods,          /* tp_methods */
