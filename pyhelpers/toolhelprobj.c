@@ -1,7 +1,7 @@
 /*
  * Win32 Process Helpers
  *
- * Copyright (c) 2007 Gianluigi Tiesi <sherpya@netfarm.it>
+ * Copyright (c) 2008 Gianluigi Tiesi <sherpya@netfarm.it>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -105,8 +105,10 @@ static PyObject *ToolHelp_iternext(ToolHelpObject *self)
 
         CloseHandle(hModuleSnap);
     }
-    //else
-    //    fprintf(stderr, "SnapModule() Failed %d\n", GetLastError());
+    /*
+    else
+        fprintf(stderr, "SnapModule() Failed %d\n", GetLastError());
+    */
 
     return Py_BuildValue("(l,s,O)", pid, szExeFile, list);
 }

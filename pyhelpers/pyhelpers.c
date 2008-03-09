@@ -1,7 +1,7 @@
 /*
  * Win32 Process Helpers
  *
- * Copyright (c) 2007 Gianluigi Tiesi <sherpya@netfarm.it>
+ * Copyright (c) 2008 Gianluigi Tiesi <sherpya@netfarm.it>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -76,7 +76,7 @@ initpyhelpers(void)
     else
         fprintf(stderr, "ToolHelp module not supported on this OS\n");
 
-    //Py_AtExit(pyhi_cleanup);
+    /* Py_AtExit(pyhi_cleanup); */
 }
 
 int main(int argc, char *argv[])
