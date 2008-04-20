@@ -45,8 +45,8 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="python setup.py build"
-				ReBuildCommandLine="python setup.py build -f"
+				BuildCommandLine="python setup.py build&#x0D;&#x0A;mt -nologo -manifest $(TargetPath).manifest -outputresource:$(TargetPath);#2"
+				ReBuildCommandLine="python setup.py build -f&#x0D;&#x0A;mt -nologo -manifest $(TargetPath).manifest -outputresource:$(TargetPath);#2"
 				CleanCommandLine="python setup.py clean -a"
 				Output="$(ProjectDir)\build\lib.win32-2.5\pyhelpers.pyd"
 				PreprocessorDefinitions="WIN32;NDEBUG"

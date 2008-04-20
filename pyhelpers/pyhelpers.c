@@ -62,17 +62,15 @@ static PyMethodDef pyhelpersMethods[] =
 PyMODINIT_FUNC
 initpyhelpers(void)
 {
-    PyObject *module = NULL, *dict = NULL;
-    module = Py_InitModule("pyhelpers", pyhelpersMethods);
-    dict = PyModule_GetDict(module);
+    PyObject *m = Py_InitModule("pyhelpers", pyhelpersMethods);
 
-    PyhelpersError = PyErr_NewException("pyhelpers.error", NULL, NULL);
-    PyDict_SetItemString(dict, "error", PyhelpersError);
+    PyhelpersError = PyErr_NewException("pyhelpers.PyhelpersError", NULL, NULL);
+    PyModule_AddObject(m, "PyhelpersError", PyhelpersError);
 
-    PyDict_SetItemString(dict, "__version__", PyString_FromString(PYHELPERS_VERSION));
+    PyModule_AddStringConstant(m, "__version__", PYHELPERS_VERSION);
 
     if (pyhi_dynlink())
-        initToolHelp(module);
+        initToolHelp(m);
     else
         fprintf(stderr, "ToolHelp module not supported on this OS\n");
 
